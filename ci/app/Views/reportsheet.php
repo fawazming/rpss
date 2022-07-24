@@ -10,7 +10,7 @@
                         </span>
                         <div class="col-sm-12 col-md-6 col-lg-6">
                             <div class="mt-4">
-                            <select class="form-select" name="subj" id="">
+                            <select class="form-select" name="clss" id="">
                                     <option value="" selected disabled>Classes</option>
                                     <?php foreach ($classes as $cls):?>
                                     <option value="<?=$cls?>"><?=$cls?></option>
