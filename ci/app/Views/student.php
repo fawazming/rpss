@@ -69,11 +69,6 @@
             <div class="col-sm-12 col-md-4 col-lg-4">
                 <div class="card">
                     <div class="card-body">
-                        <div class="list-group">
-                            <?php foreach ($students as $key => $student) : ?>
-                                <button type="button" class="list-group-item list-group-item-action"><?= $student['lname'] . ' ' . $student['fname'] . ' of ' . $student['class'] ?> </button>
-                            <?php endforeach; ?>
-                        </div>
                         <?php foreach ($classes as $class) : ?>
                             <div class="accordion mb-3" id="<?= $class ?>Example">
                                 <div class="accordion-item">
@@ -84,7 +79,11 @@
                                     </h2>
                                     <div id="<?= $class ?>Collapse" class="accordion-collapse collapse" aria-labelledby="<?= $class ?>Heading" data-bs-parent="#<?= $class ?>Example">
                                         <div class="accordion-body">
-
+                                             <?php foreach ($students as $key => $student) : ?>
+                                                <?php if ($student['class'] == $class):?>
+                                                <button type="button" class="list-group-item list-group-item-action"><?= $student['lname'] . ' ' . $student['fname'] . ' of ' . $student['class'] ?> </button>
+                                            <?php endif; ?>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
                                 </div>

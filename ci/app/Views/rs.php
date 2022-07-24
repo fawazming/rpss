@@ -19,7 +19,7 @@
     <div class="container sheet padding-10mm">
         <header>
             <img class="logo" src="assets/rs/img/AAIS_Logo_full.png" alt="">
-            <p class="title">Report for Second Term 2021/2022 Session</p>
+            <p class="title">Report for Third Term 2021/2022 Session</p>
             <div class="details">
                 <div class="float-left">
                     <p class="name">Name: <b><?=$stud['name']?></b>  </p>
@@ -28,7 +28,7 @@
                 </div>
                 <div class="float-right">
                 <p class="admn">ADM NO: <b><?=$stud['students_id']?></b> </p>
-                    <p class="pres">Present in School: <b>126</b> times </p>
+                    <p class="pres">Present in School: <b><?=$stud['present']?></b> times </p>
                     <p class="abst">Absent in School: <b><?=$stud['absent']?></b> times</p>
                 </div>
                 
@@ -182,7 +182,7 @@
                 &nbsp;
                 &nbsp;
                 &nbsp;
-                <p class="stat">Number in class: <b> 4 </b></p>
+                <p class="stat">Number in class: <b> <?=$vars['nic']?> </b></p>
                 <p class="stat">Percentage: <b><?= per($stud['cat_total'] + $stud['project_total'] + $stud['exam_total'])?>%</b></p>
                 &nbsp;
                 &nbsp; 
@@ -192,10 +192,10 @@
 
                 <p class="stat">Remark: <b><?=remark(per($stud['cat_total'] + $stud['project_total'] + $stud['exam_total']))?></b></p>
                 <br>
-                <p class="stat">School Opened:   <b> 126 </b> times</p>
+                <p class="stat">School Opened:   <b> <?=$vars['schOpened']?> </b> times</p>
                 <!-- <p class="stat">Absent:  <b>20</b> times</p> -->
-                <p class="stat">School Resumes: <b>25, April</b></p>
-                <p class="stat">School Fees:  <b>&#x20a6;30,000</b></p>
+                <p class="stat">School Resumes: <b><?=$vars['schResume']?></b></p>
+                <p class="stat">School Fees:  <b>&#x20a6;<?=$vars['schFees']?></b></p>
             </div>
         </main>
         <footer>

@@ -130,14 +130,23 @@ class Logic extends BaseController
 		$Broadsheet = new \App\Models\Broadsheet();
 		$students = new \App\Models\Students();
 		$Indiv = new \App\Models\Indiv();
-		$clss = $this->request->getGet('subj'); 
+		$clss = $this->request->getGet('clss');
+		
+		$t = $variables->where('name','term')->first()['value'];
+		$s = $variables->where('name','session')->first()['value'];
+		$st = $s.$t;
 
 		$classes = explode(',', $variables->where('name', 'classes')->find()[0]['value']);
+		$noInClass = $variables->where('name', 'nic_'.$clss)->find()[0]['value'];
+		$schOpened = $variables->where('name', 'schoolOpened')->find()[0]['value'];
+		$schResume = $variables->where('name', 'schoolResume')->find()[0]['value'];
+		$schFees = $variables->where('name', 'schoolFees')->find()[0]['value'];
 
-			$stud = $Broadsheet->join('indiv_students', 'indiv_students.students_id = broadsheet.students_id')->where(['sessionterm'=>'21222'])->find();
+			$stud = $Broadsheet->join('indiv_students', 'indiv_students.students_id = broadsheet.students_id')->where(['broadsheet.class'=>$clss, 'sessionterm'=>$st, ])->find();
 
 		$data = [
 			'studs'=>$stud,
+			'vars'=>['nic'=>$noInClass,'schOpened'=>$schOpened,'schResume'=>$schResume,'schFees'=>$schFees]
 		];
 
 
@@ -150,12 +159,16 @@ class Logic extends BaseController
 		$variables = new \App\Models\Variables();
 		$Broadsheet = new \App\Models\Broadsheet();
 		$students = new \App\Models\Students();
+		
+		$t = $variables->where('name','term')->first()['value'];
+		$s = $variables->where('name','session')->first()['value'];
+		$st = $s.$t;
 
 		$stud = [];
 
 		$classes = explode(',', $variables->where('name', 'classes')->find()[0]['value']);
 		foreach ($classes as $cls) {
-			$stud[$cls] = $Broadsheet->where(['sessionterm'=>'21222', 'class' => $cls])->find();
+			$stud[$cls] = $Broadsheet->where(['sessionterm'=>$st, 'class' => $cls])->find();
 		}
 
 		$incoming = explode(',', $this->request->getGet('subj'));
