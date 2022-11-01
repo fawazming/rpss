@@ -6,7 +6,7 @@
                             data-feather="settings"></i></a><img class="img-90 rounded-circle"
                         src="assets/images/dashboard/1.png" alt=""><a
                         href="user-profile.html">
-                        <h6 class="mt-3 f-14 f-w-600">AAIS Personnel</h6>
+                        <h6 class="mt-3 f-14 f-w-600">AAIS Personel</h6>
                     </a>
 <!--                     <p class="mb-0 font-roboto">Human Resources Department</p> -->                </div>
                 <nav>
