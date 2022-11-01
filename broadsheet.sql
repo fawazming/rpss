@@ -58,7 +58,7 @@ CREATE TABLE `broadsheet` (
   `project_total` int(11) GENERATED ALWAYS AS (`ar_project` + `bs1_project` + `bs2_project` + `bu_project` + `ca_project` + `nv_project` + `pv_project` + `en_project` + `qr_project` + `ir_project` + `mt_project` + `yo_project` + 0) VIRTUAL,
   `exam_total` int(11) GENERATED ALWAYS AS (`ar_exam` + `bs1_exam` + `bs2_exam` + `bu_exam` + `ca_exam` + `nv_exam` + `pv_exam` + `en_exam` + `qr_exam` + `ir_exam` + `mt_exam` + `yo_exam` + 0) VIRTUAL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 
 INSERT INTO broadsheet VALUES("1","1902","Bello AbdurRasheed","SS1","21221","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
 INSERT INTO broadsheet VALUES("2","1901","Akinyemi AbdulMalik","SS1","21221","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0","0");
