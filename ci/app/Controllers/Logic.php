@@ -298,7 +298,7 @@ class Logic extends BaseController
 	    $return = '';
 	    $namer = '';
 	    foreach($tables as $table){
-	    	$namer = $table;
+	    	$namer = $table.date('');
 	        $result = $db->query("SELECT * FROM $table");
 	        $numColumns = $result->field_count;
 
@@ -360,19 +360,67 @@ class Logic extends BaseController
 		return $stds;
 	}
 
+    private function termIncr()
+    {
+        $Variables = new \App\Models\Variables();
+        $Students = new \App\Models\Students();
+
+        $t = $Variables->where('name','term')->first();
+        $s = $Variables->where('name','session')->first();
+        $c = $Variables->where('name','classes')->first();
+
+        if($t['value'] == 3){
+            $ns = substr($s['value'],2);
+            $nns = $ns.($ns+1);
+            $Variables->update($s['id'], ['value'=>$nns]);
+            $Variables->update($t['id'], ['value'=>1]);
+
+            // Increment Class
+            $as = $Students->findAll();
+            foreach ($as as $key => $st) {
+                $this->classIncr($st);
+            }
+        }else{
+            $Variables->update($t['id'], ['value'=>($t['value']+1)]);
+        }
+        return [$t['value'], $s['value']];
+    }
+
+    private function classIncr($student)
+    {
+        $Students = new \App\Models\Students();
+        $Variables = new \App\Models\Variables();
+        $c = $Variables->where('name','classes')->first();
+
+        $needle = $student['class'];
+        if($needle == 'Leaver'){
+            $newClas = 'Leaver';
+        }else{
+            $haystack = explode(',', $c['value']);
+            $result = array_search($needle, $haystack);
+            if($result+1 == count($haystack)){
+                $newClas = 'Leaver';
+            }else{
+                $newClas = $haystack[$result+1];
+            }
+        }
+
+        $Students->update($student['id'], ['class'=>$newClas]);
+    }
+
 	public function newTerm()
 	{
-		$Variables = new \App\Models\Variables();
-		$r = $Variables->where('name','term')->first();
+
 
 		// create a private function to increment term in respect to session
-		// $res = $Variables->update($r['id'], ['value'=>($r['value']+1)]);
+        $rs = $this->termIncr();
+
 		$this->backupDB('broadsheet');
 		$this->backupDB('indiv_students');
 
-		$db = \Config\Database::connect();
-		$query = $db->query('TRUNCATE TABLE broadsheet');
-		$query = $db->query('TRUNCATE TABLE indiv_students');
+		// $db = \Config\Database::connect();
+		// $query = $db->query('TRUNCATE TABLE broadsheet');
+		// $query = $db->query('TRUNCATE TABLE indiv_students');
 
 		$this->populateBroadsheet();
 		

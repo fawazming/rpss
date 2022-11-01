@@ -24,19 +24,19 @@ function remark($score)
 {
 	switch ($score) {
 		case $score >= 90 && $score <= 100:
-			return 'Excellent';
+			return 'Distinction'; //Distinction
 			break;
 		case $score >= 70 && $score <= 89:
+			return 'Excellent';
+			break;
+		case $score >= 50 && $score <= 69:
 			return 'V. Good';
 			break;
-		case $score >= 45 && $score <= 69:
-			return 'Good';
-			break;
-		case $score >= 35 && $score <= 44:
-			return 'Fair';
+		case $score >= 35 && $score <= 49:
+			return 'Pass';
 			break;
 		case $score >= 0 && $score <= 34:
-			return 'Poor';
+			return 'Fair';
 			break;
 	}
 }
